@@ -7,7 +7,7 @@
     display: flex;
     align-items: stretch;
     overflow: hidden;
-    border-radius: var(--slds-g-radius-border-4, 1.25rem);
+    border-radius: var(--slds-s-container-radius-border, 1.25rem);
     background: var(--slds-g-color-surface-container-1, #ffffff);
     box-shadow:
         0 0 10px 0 rgba(0, 0, 0, 0.12),
