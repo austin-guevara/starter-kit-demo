@@ -13,6 +13,7 @@ import Home from 'page/home';
 import IconTest from 'page/iconTest';
 import Contacts from 'page/contacts';
 import ContactDetail from 'page/contactDetail';
+import Onboarding from 'page/onboarding';
 import Builder from 'page/builder';
 import NotFound from 'page/notFound';
 
@@ -22,6 +23,7 @@ const ROUTE_COMPONENTS = {
     'page-icon-test': IconTest,
     'page-contacts': Contacts,
     'page-contact-detail': ContactDetail,
+    'page-onboarding': Onboarding,
     'page-builder': Builder,
 };
 

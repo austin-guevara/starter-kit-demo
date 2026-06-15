@@ -1,0 +1,135 @@
+:host {
+    display: block;
+}
+
+/* ── Card shell ── */
+.c-onboarding {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: var(--slds-g-radius-border-4, 1.25rem);
+    background: var(--slds-g-color-surface-container-1, #ffffff);
+    box-shadow:
+        0 0 10px 0 rgba(0, 0, 0, 0.12),
+        0 7px 7px 0 rgba(0, 0, 0, 0.12),
+        0 -1px 3px 0 rgba(0, 0, 0, 0.07);
+}
+
+/* ── Left hero pane ── */
+.c-onboarding__hero {
+    position: relative;
+    flex: 0 0 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--slds-g-spacing-7, 2.5rem);
+    padding-bottom: var(--slds-g-spacing-9, 3.5rem);
+    background-image: url('/images/onboarding-hero.png');
+    background-size: cover;
+    background-position: center top;
+}
+
+.c-onboarding__hero-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        to top,
+        rgba(11, 18, 40, 0.95) 0%,
+        rgba(11, 18, 40, 0) 71%
+    );
+}
+
+.c-onboarding__hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--slds-g-spacing-7, 2.5rem);
+}
+
+.c-onboarding__hero-title {
+    color: var(--slds-g-color-on-surface-inverse-1, #ffffff);
+    font-size: var(--slds-g-font-scale-5, 1.75rem);
+    line-height: var(--slds-g-font-line-height-2, 1.25);
+    text-align: center;
+}
+
+/* ── Right survey pane ── */
+.c-onboarding__survey {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--slds-g-spacing-9, 3.5rem);
+    padding: var(--slds-g-spacing-9, 3.5rem);
+}
+
+.c-onboarding__progress {
+    width: 100%;
+}
+
+.c-onboarding__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--slds-g-spacing-9, 3.5rem);
+    width: 100%;
+}
+
+.c-onboarding__heading {
+    width: 100%;
+    color: var(--slds-g-color-info-base-15, #03234d);
+    font-size: var(--slds-g-font-scale-6, 2rem);
+    line-height: var(--slds-g-font-line-height-2, 1.25);
+    text-align: center;
+}
+
+/* ── Skill checkbox grid ── */
+.c-onboarding__options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--slds-g-spacing-12, 5rem);
+    row-gap: var(--slds-g-spacing-4, 1rem);
+    width: 100%;
+}
+
+.c-onboarding__option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--slds-g-spacing-2, 0.5rem);
+}
+
+.c-onboarding__count {
+    flex: 0 0 auto;
+    color: var(--slds-g-color-on-surface-1, #5c5c5c);
+    font-size: var(--slds-g-font-size-base, 0.8125rem);
+    font-weight: var(--slds-g-font-weight-7, 700);
+}
+
+.c-onboarding__footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+/* ── Responsive: stack panes on narrow viewports ── */
+@media (max-width: 48em) {
+    .c-onboarding {
+        flex-direction: column;
+    }
+
+    .c-onboarding__hero {
+        flex-basis: auto;
+        min-height: 18.75rem;
+    }
+
+    .c-onboarding__options {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+}

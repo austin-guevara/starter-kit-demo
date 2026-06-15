@@ -41,6 +41,13 @@ export const routes = [
     navHighlight: 'contacts',
   },
   {
+    path: '/onboarding',
+    component: 'page-onboarding',
+    title: 'Onboarding',
+    navPage: 'onboarding',
+    navLabel: 'Onboarding',
+  },
+  {
     path: '/',
     component: 'page-builder',
     title: 'Builder',

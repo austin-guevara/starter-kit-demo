@@ -1,0 +1,62 @@
+<template>
+    <article class="c-onboarding">
+
+        <!-- Left: hero pane -->
+        <div class="c-onboarding__hero">
+            <div class="c-onboarding__hero-overlay" aria-hidden="true"></div>
+            <div class="c-onboarding__hero-content">
+                <p class="c-onboarding__hero-title">{heroTitle}</p>
+                <lightning-button
+                    variant="inverse"
+                    label={heroButtonLabel}
+                    class="c-onboarding__hero-button"
+                    onclick={handleScheduleMeeting}>
+                </lightning-button>
+            </div>
+        </div>
+
+        <!-- Right: survey pane -->
+        <div class="c-onboarding__survey">
+            <lightning-progress-indicator
+                type="base"
+                current-step={currentStep}
+                class="c-onboarding__progress">
+                <template for:each={steps} for:item="step">
+                    <lightning-progress-step
+                        key={step.value}
+                        label={step.label}
+                        value={step.value}>
+                    </lightning-progress-step>
+                </template>
+            </lightning-progress-indicator>
+
+            <div class="c-onboarding__main">
+                <h2 class="c-onboarding__heading">{question}</h2>
+
+                <div class="c-onboarding__options">
+                    <template for:each={skills} for:item="skill">
+                        <div key={skill.value} class="c-onboarding__option">
+                            <lightning-input
+                                type="checkbox"
+                                label={skill.label}
+                                data-value={skill.value}
+                                checked={skill.checked}
+                                onchange={handleSkillChange}>
+                            </lightning-input>
+                            <span class="c-onboarding__count">{skill.count}</span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="c-onboarding__footer">
+                <lightning-button
+                    variant="brand"
+                    label="Next Question"
+                    onclick={handleNextQuestion}>
+                </lightning-button>
+            </div>
+        </div>
+
+    </article>
+</template>

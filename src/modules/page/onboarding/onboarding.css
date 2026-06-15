@@ -1,0 +1,27 @@
+:host {
+    display: block;
+    background-color: var(--slds-g-color-surface-2, #f3f3f3);
+}
+
+.page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--slds-g-spacing-6, 2rem);
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--slds-g-spacing-4, 1rem);
+    margin-bottom: var(--slds-g-spacing-6, 2rem);
+}
+
+.page-header__title {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header__subtitle {
+    color: var(--slds-g-color-on-surface-1, #5c5c5c);
+}
