@@ -36,6 +36,15 @@ const STEPS = [
     },
 ];
 
+// Steps shown in the progress indicator. The first two map to real content
+// pages (STEPS); the rest are display-only placeholders for the full journey.
+const INDICATOR_STEPS = [
+    { value: 'skills', label: 'Skills' },
+    { value: 'channels', label: 'Channels' },
+    { value: 'tone', label: 'Tone' },
+    { value: 'review', label: 'Review' },
+];
+
 export default class OnboardingCard extends LightningElement {
     heroImage = HERO_IMAGE;
     heroTitle = 'Personal call with Shelby';
@@ -46,7 +55,7 @@ export default class OnboardingCard extends LightningElement {
     _selectedByStep = STEPS.map(() => new Set());
 
     get steps() {
-        return STEPS.map((step) => ({ value: step.value, label: step.label }));
+        return INDICATOR_STEPS;
     }
 
     get currentStep() {
