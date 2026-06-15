@@ -25,9 +25,16 @@
     align-items: center;
     gap: var(--slds-g-spacing-7, 2.5rem);
     padding-bottom: var(--slds-g-spacing-9, 3.5rem);
-    background-image: url('/images/onboarding-hero.png');
-    background-size: cover;
-    background-position: center top;
+}
+
+.c-onboarding__hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    pointer-events: none;
 }
 
 .c-onboarding__hero-overlay {

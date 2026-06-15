@@ -1,6 +1,10 @@
 import { LightningElement } from 'lwc';
 import Toast from 'lightning/toast';
 
+// Resolve against Vite's base URL so the image loads under any deploy subpath
+// (e.g. GitHub Pages serves the app from /<repo>/ rather than the domain root).
+const HERO_IMAGE = `${import.meta.env.BASE_URL}images/onboarding-hero.png`;
+
 const SKILLS = [
     { label: 'Design Intelligence', value: 'design-intelligence', count: 12 },
     { label: 'Operational', value: 'operational', count: 4 },
@@ -11,6 +15,7 @@ const SKILLS = [
 ];
 
 export default class OnboardingCard extends LightningElement {
+    heroImage = HERO_IMAGE;
     heroTitle = 'Personal call with Shelby';
     heroButtonLabel = 'Schedule a Meeting';
     question = 'What kind of agent skills do you want?';
