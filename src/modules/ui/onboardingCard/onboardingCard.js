@@ -5,44 +5,81 @@ import Toast from 'lightning/toast';
 // (e.g. GitHub Pages serves the app from /<repo>/ rather than the domain root).
 const HERO_IMAGE = `${import.meta.env.BASE_URL}images/onboarding-hero.png`;
 
-const SKILLS = [
-    { label: 'Design Intelligence', value: 'design-intelligence', count: 12 },
-    { label: 'Operational', value: 'operational', count: 4 },
-    { label: 'Product Management', value: 'product-management', count: 22 },
-    { label: 'UI Technology', value: 'ui-technology', count: 11 },
-    { label: 'Data Processing', value: 'data-processing', count: 9 },
-    { label: 'Agent Building', value: 'agent-building', count: 17 },
+// Each step is one page in the wizard. The progress indicator and the question
+// content are both driven from this list.
+const STEPS = [
+    {
+        value: 'skills',
+        label: 'Skills',
+        question: 'What kind of agent skills do you want?',
+        options: [
+            { label: 'Design Intelligence', value: 'design-intelligence', count: 12 },
+            { label: 'Operational', value: 'operational', count: 4 },
+            { label: 'Product Management', value: 'product-management', count: 22 },
+            { label: 'UI Technology', value: 'ui-technology', count: 11 },
+            { label: 'Data Processing', value: 'data-processing', count: 9 },
+            { label: 'Agent Building', value: 'agent-building', count: 17 },
+        ],
+    },
+    {
+        value: 'channels',
+        label: 'Channels',
+        question: 'Where should your agent show up?',
+        options: [
+            { label: 'Web Chat', value: 'web-chat', count: 8 },
+            { label: 'Email', value: 'email', count: 5 },
+            { label: 'Slack', value: 'slack', count: 14 },
+            { label: 'Mobile App', value: 'mobile-app', count: 7 },
+            { label: 'Voice', value: 'voice', count: 3 },
+            { label: 'SMS', value: 'sms', count: 6 },
+        ],
+    },
 ];
 
 export default class OnboardingCard extends LightningElement {
     heroImage = HERO_IMAGE;
     heroTitle = 'Personal call with Shelby';
     heroButtonLabel = 'Schedule a Meeting';
-    question = 'What kind of agent skills do you want?';
-    currentStep = 'skills';
 
-    steps = [
-        { label: 'Skills', value: 'skills' },
-        { label: 'Channels', value: 'channels' },
-        { label: 'Tone', value: 'tone' },
-        { label: 'Review', value: 'review' },
-    ];
+    _stepIndex = 0;
+    // Track selections per step so each page keeps its own checked state.
+    _selectedByStep = STEPS.map(() => new Set());
 
-    _selected = new Set();
+    get steps() {
+        return STEPS.map((step) => ({ value: step.value, label: step.label }));
+    }
 
-    get skills() {
-        return SKILLS.map((skill) => ({
-            ...skill,
-            checked: this._selected.has(skill.value),
+    get currentStep() {
+        return STEPS[this._stepIndex].value;
+    }
+
+    get question() {
+        return STEPS[this._stepIndex].question;
+    }
+
+    get options() {
+        const selected = this._selectedByStep[this._stepIndex];
+        return STEPS[this._stepIndex].options.map((option) => ({
+            ...option,
+            checked: selected.has(option.value),
         }));
+    }
+
+    get isLastStep() {
+        return this._stepIndex === STEPS.length - 1;
+    }
+
+    get nextButtonLabel() {
+        return this.isLastStep ? 'Finish' : 'Next Question';
     }
 
     handleSkillChange(event) {
         const value = event.target.dataset.value;
+        const selected = this._selectedByStep[this._stepIndex];
         if (event.target.checked) {
-            this._selected.add(value);
+            selected.add(value);
         } else {
-            this._selected.delete(value);
+            selected.delete(value);
         }
     }
 
@@ -56,14 +93,15 @@ export default class OnboardingCard extends LightningElement {
     }
 
     handleNextQuestion() {
-        const count = this._selected.size;
-        Toast.show({
-            label: 'Next Question',
-            message: count
-                ? `${count} skill${count === 1 ? '' : 's'} selected.`
-                : 'Select at least one skill to continue.',
-            variant: count ? 'success' : 'warning',
-            mode: 'dismissible',
-        });
+        if (this.isLastStep) {
+            Toast.show({
+                label: 'All done',
+                message: 'Your agent preferences have been saved.',
+                variant: 'success',
+                mode: 'dismissible',
+            });
+            return;
+        }
+        this._stepIndex += 1;
     }
 }
